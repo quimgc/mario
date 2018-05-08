@@ -6,6 +6,8 @@ function preload() {
   game.load.tilemap('mario', 'assets/tilemaps/maps/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('tiles', 'assets/tilemaps/tiles/super_mario.png');
   // game.load.image('player', 'assets/sprites/phaser-dude.png');
+  game.load.spritesheet('player','assets/sprites/player.png', 20,16)
+
 
 }
 
@@ -30,26 +32,56 @@ function create() {
 
   cursors = game.input.keyboard.createCursorKeys();
 
+  //player
+  p = game.add.sprite(250,50, 'player',0)
+
+  game.physics.arcade.enable(p)
+
+  p.body.gravity.y = 600
+
+
+  //quins objectes es poden col·lisionar
+  map.setCollisionBetween(15, 16)
+  map.setCollisionBetween(20, 25)
+  map.setCollisionBetween(27, 29)
+  map.setCollision(40)
+
+  //PER A QUE LA CAMARA SEGUEIXI AL JUGADOR.
+  game.camera.follow(p);
+
 }
 
 function update() {
+  //amb això es mira si el player està col·lisionant amb layer ()
+  game.physics.arcade.collide(p, layer)
 
-  if (cursors.left.isDown)
-  {
-    game.camera.x -= 8;
-  }
-  else if (cursors.right.isDown)
-  {
-    game.camera.x += 8;
-  }
+  p.body.velocity.x = 0;
+
+  inputs()
+
+}
+
+function inputs() {
 
   if (cursors.up.isDown)
   {
-    game.camera.y -= 8;
-  }
-  else if (cursors.down.isDown)
-  {
-    game.camera.y += 8;
+    if (p.body.onFloor())
+    {
+      p.body.velocity.y = -300;
+    }
   }
 
+  if (cursors.down.isDown)
+  {
+    p.body.velocity.y = 330;
+  }
+
+  if (cursors.left.isDown)
+  {
+    p.body.velocity.x = -150;
+  }
+  else if (cursors.right.isDown)
+  {
+    p.body.velocity.x = 150;
+  }
 }
