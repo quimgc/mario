@@ -48,8 +48,26 @@ var hasMort = {
   create: function () {
     game.stage.backgroundColor = "#0047aa"
     game.add.text(game.width/2-140, game.height/2*0.25, 'Has mort!', { font: '54px Arial', fill: '#000000' })
-    game.add.text(game.width/2-330, game.height/2, 'Puntuacio: '+coins, { font: '25px Arial', fill: '#ffff00' })
-    game.add.text(game.width/2-330, game.height/2*1.5, 'Vides restants: '+health, { font: '25px Arial', fill: '#ffff00' })
+    game.add.text(game.width/2-330, game.height/2, 'Puntuacio: '+coins, { font: '25px Arial', fill: '#ff1810' })
+    game.add.text(game.width/2-330, game.height/2*1.5, 'Vides restants: '+health, { font: '25px Arial', fill: '#ff1810' })
+    game.add.button(game.width/2-240 , game.height-200, 'btnmenu', this.menuInicial, this, 2, 1, 0)
+
+  },
+  menuInicial: function () {
+    game.state.start('menu')
+  }
+}
+var win = {
+  preload: function () {
+    game.load.spritesheet('btnmenu', 'assets/buttons/button_menu2.png', 300, 390);
+
+  },
+
+  create: function () {
+    game.stage.backgroundColor = "#0047aa"
+    game.add.text(game.width/2-140, game.height/2*0.25, 'Has guanyat!', { font: '54px Arial', fill: '#000000' })
+    game.add.text(game.width/2-330, game.height/2, 'Puntuacio: '+coins, { font: '25px Arial', fill: '#ff1810' })
+    game.add.text(game.width/2-330, game.height/2*1.5, 'Vides restants: '+health, { font: '25px Arial', fill: '#ff1810' })
     game.add.button(game.width/2-240 , game.height-200, 'btnmenu', this.menuInicial, this, 2, 1, 0)
 
   },
@@ -265,7 +283,7 @@ var level1 = {
 var level2 = {
 
   preload: function () {
-    this.game.load.tilemap('mario', 'assets/tilemaps/maps/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('mario', 'assets/tilemaps/maps/super_mario2.json', null, Phaser.Tilemap.TILED_JSON);
     this.game.load.image('tiles', 'assets/tilemaps/tiles/super_mario.png');
     // this.game.load.image('player', 'assets/sprites/phaser-dude.png');
     this.game.load.spritesheet('player', 'assets/sprites/player.png', 20, 16)
@@ -464,7 +482,7 @@ var level2 = {
     this.game.camera.follow(player);
   },
   nextLevel: function (sprite, title) {
-    game.state.start('level2')
+    game.state.start('win')
   }
 }
 
@@ -475,6 +493,7 @@ var game = new Phaser.Game(800, 240, Phaser.AUTO, 'game');
 game.state.add('menu', menu)
 game.state.add('level1', level1)
 game.state.add('mort', hasMort)
-// game.state.add('level2', level2)
+game.state.add('level2', level2)
+game.state.add('win', win)
 
 game.state.start('menu')
