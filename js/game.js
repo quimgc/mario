@@ -73,7 +73,7 @@ var level1 = {
     this.game.load.tilemap('mario', 'assets/tilemaps/maps/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
     this.game.load.image('tiles', 'assets/tilemaps/tiles/super_mario.png');
     // this.game.load.image('player', 'assets/sprites/phaser-dude.png');
-    this.game.load.spritesheet('player', 'assets/sprites/player.png', 20, 16)
+    this.game.load.spritesheet('player', 'assets/sprites/player.png', 15, 16)
     game.load.audio('coin',['assets/coin.wav', 'assets/coin.mp3'])
     game.load.audio('jump',['assets/jump.wav', 'assets/jump.mp3'])
     game.load.audio('dust',['assets/dust.wav', 'assets/dust.mp3'])
@@ -146,6 +146,7 @@ var level1 = {
     this.game.physics.arcade.collide(player, layer)
 
     player.body.velocity.x = 0;
+    player.animations.play('walk')
 
     this.inputs()
     this.playerIsDie()
@@ -170,10 +171,16 @@ var level1 = {
     }
 
     if (cursors.left.isDown) {
+      player.scale.x = -1
+      player.animations.play('walk')
       player.body.velocity.x = -150;
     }
     else if (cursors.right.isDown) {
+      player.scale.x = 1
+      player.animations.play('walk')
       player.body.velocity.x = 150;
+    } else {
+      player.animations.stop()
     }
 
     if(player.body.onFloor()) {
@@ -258,7 +265,7 @@ var level1 = {
 
   putPlayer: function (x,y) {
     player = this.game.add.sprite(x, y, 'player', 0)
-
+    player.animations.add('walk',[0,1,2,3],5,true)
 
     this.game.physics.arcade.enable(player)
 
@@ -276,7 +283,7 @@ var level2 = {
     this.game.load.tilemap('mario', 'assets/tilemaps/maps/super_mario2.json', null, Phaser.Tilemap.TILED_JSON);
     this.game.load.image('tiles', 'assets/tilemaps/tiles/super_mario.png');
     // this.game.load.image('player', 'assets/sprites/phaser-dude.png');
-    this.game.load.spritesheet('player', 'assets/sprites/player.png', 20, 16)
+    this.game.load.spritesheet('player', 'assets/sprites/player.png', 15, 16)
     game.load.audio('coin',['assets/coin.wav', 'assets/coin.mp3'])
     game.load.audio('jump',['assets/jump.wav', 'assets/jump.mp3'])
     game.load.audio('dust',['assets/dust.wav', 'assets/dust.mp3'])
@@ -285,7 +292,7 @@ var level2 = {
   },
 
   create: function () {
-    level = 2;
+    level = 1;
     this.game.stage.backgroundColor = '#787878';
 
     map = this.game.add.tilemap('mario');
@@ -300,7 +307,7 @@ var level2 = {
 
     cursors = this.game.input.keyboard.createCursorKeys();
 
-
+    //player
     this.putPlayer(200,50)
 
     //PARTICULES
@@ -349,6 +356,7 @@ var level2 = {
     this.game.physics.arcade.collide(player, layer)
 
     player.body.velocity.x = 0;
+    player.animations.play('walk')
 
     this.inputs()
     this.playerIsDie()
@@ -373,10 +381,16 @@ var level2 = {
     }
 
     if (cursors.left.isDown) {
+      player.scale.x = -1
+      player.animations.play('walk')
       player.body.velocity.x = -150;
     }
     else if (cursors.right.isDown) {
+      player.scale.x = 1
+      player.animations.play('walk')
       player.body.velocity.x = 150;
+    } else {
+      player.animations.stop()
     }
 
     if(player.body.onFloor()) {
@@ -456,11 +470,12 @@ var level2 = {
     game.debug.text('coins: '+ coins|| 'FPS: --',10,40,"#00ff00")
     game.debug.text('level: '+ level|| 'FPS: --',10,60,"#00ff00")
     game.debug.text('stars: '+ stars|| 'FPS: --',10,80,"#00ff00")
+
   },
 
   putPlayer: function (x,y) {
     player = this.game.add.sprite(x, y, 'player', 0)
-
+    player.animations.add('walk',[0,1,2,3],5,true)
 
     this.game.physics.arcade.enable(player)
 
