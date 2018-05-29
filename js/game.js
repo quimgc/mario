@@ -1,11 +1,3 @@
-var menu = {
-  preload: function () {
-    //TODO
-  },
-  create: function () {
-
-  }
-}
 
 var map;
 var layer;
@@ -261,9 +253,7 @@ var level1 = {
     game.debug.text('coins: '+ coins|| 'FPS: --',10,40,"#00ff00")
     game.debug.text('level: '+ level|| 'FPS: --',10,60,"#00ff00")
     game.debug.text('stars: '+ stars|| 'FPS: --',10,80,"#00ff00")
-    game.debug.text('player.x: '+ player.body.x|| 'FPS: --',10,100,"#00ff00")
-    game.debug.text('player.y: '+ player.body.y|| 'FPS: --',10,120,"#00ff00")
-    game.debug.text('jumpin: '+ jumping || 'FPS: --',10,140,"#00ff00")
+
   },
 
   putPlayer: function (x,y) {
@@ -466,9 +456,6 @@ var level2 = {
     game.debug.text('coins: '+ coins|| 'FPS: --',10,40,"#00ff00")
     game.debug.text('level: '+ level|| 'FPS: --',10,60,"#00ff00")
     game.debug.text('stars: '+ stars|| 'FPS: --',10,80,"#00ff00")
-    game.debug.text('player.x: '+ player.body.x|| 'FPS: --',10,100,"#00ff00")
-    game.debug.text('player.y: '+ player.body.y|| 'FPS: --',10,120,"#00ff00")
-    game.debug.text('jumpin: '+ jumping || 'FPS: --',10,140,"#00ff00")
   },
 
   putPlayer: function (x,y) {
